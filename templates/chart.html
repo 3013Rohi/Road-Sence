@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Road Accident Prediction" />
+    <meta name="author" content="Rohit.jsx" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+      rel="stylesheet"
+    />
+    <!--Icon-->
+    <link rel="icon" type="image/png" href="..\static\icon\ig.png" />
+    <title>RoadSence</title>
+    <!--Icon-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/css/font-awesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/templatemo-training-studio.css"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        color: #333;
+        padding-top: 80px; /* Add padding to prevent content from being hidden behind the navbar */
+      }
+
+      .header-area {
+        background-color: rgba(
+          0,
+          123,
+          255,
+          0.7
+        ); /* Make the navbar semi-transparent */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 15px 0;
+        transition: background-color 0.3s ease; /* Smooth transition for background color */
+      }
+
+      .header-area .main-nav .nav li a {
+        color: #fff;
+        font-weight: 500;
+        padding: 10px 15px;
+        text-transform: uppercase;
+      }
+
+      .header-area .main-nav .nav li a:hover,
+      .header-area .main-nav .nav li a.active {
+        color: transparent;
+      }
+
+      .main-banner {
+        position: relative;
+        height: 100vh;
+        background: url("../static/images/banner-bg.jpg") no-repeat center
+          center;
+        background-size: cover;
+      }
+
+      .main-banner .header-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        animation: fadeInDown 1s;
+      }
+
+      .main-banner .header-text h2 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translate3d(0, -100%, 0);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .section h2 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #007bff;
+        animation: fadeIn 1s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .chart-section {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        animation: fadeInUp 1s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 100%, 0);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .btn-custom {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-custom:hover {
+        background-color: #0056b3;
+      }
+
+      .container {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader Start -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Header Area Start -->
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- Logo Start -->
+              <a href="index.html" class="logo">Road <em>Accident</em></a>
+              <!-- Logo End -->
+              <!-- Menu Start -->
+              <ul class="nav">
+                <li class="scroll-to-section">
+                  <a href="{{url_for('first')}}" class="active">Home</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{url_for('login')}}">Login</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{url_for('upload')}}">Upload</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{url_for('home')}}">Prediction</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{url_for('performance')}}">Performance Analysis</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{url_for('chart')}}">Chart</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{url_for('first')}}">Logout</a>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- Menu End -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Main Banner Area Start -->
+    <div class="main-banner" id="top">
+      <video autoplay muted loop id="bg-video">
+        <source src="../static/images/gym-video.mp4" type="video/mp4" />
+      </video>
+      <div class="video-overlay header-text">
+        <div class="caption">
+          <h2>RoadSence</h2>
+        </div>
+      </div>
+    </div>
+    <!-- Main Banner Area End -->
+
+    <!-- Chart Section Start -->
+    <section class="section" id="schedule">
+      <div class="container">
+        <h2>Chart</h2>
+        <div class="chart-section" id="piechart_3d"></div>
+        <div class="chart-section" id="dual_x_div"></div>
+      </div>
+    </section>
+    <!-- Chart Section End -->
+
+    <!-- Footer Start -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            &copy; 2024 RoadSence | Designed by Rohit.jsx
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Scripts -->
+    <script src="../static/js/jquery-2.1.0.min.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/scrollreveal.min.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imgfix.min.js"></script>
+    <script src="../static/js/mixitup.js"></script>
+    <script src="../static/js/accordions.js"></script>
+    <script src="../static/js/custom.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawPieChart);
+      google.charts.setOnLoadCallback(drawBarChart);
+
+      function drawPieChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Age", "Percentage"],
+          ["< 18 Years", 23.78],
+          ["18 - 25 Years", 32.6],
+          ["25 - 35 Years", 19.5],
+          ["35 - 40 Years", 14.56],
+          ["45 - 60 Years", 18.5],
+          ["> 60 Years", 7.2],
+        ]);
+
+        var options = {
+          title: "Accidents by Age Group",
+          is3D: true,
+          backgroundColor: "transparent",
+        };
+
+        var chart = new google.visualization.PieChart(
+          document.getElementById("piechart_3d")
+        );
+        chart.draw(data, options);
+      }
+
+      function drawBarChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["State", "Male", "Female"],
+          ["Uttar Pradesh", 21000, 23000],
+          ["Maharashtra", 24000, 4500],
+          ["Bihar", 30000, 14300],
+          ["Tamil Nadu", 30000, 14300],
+        ]);
+
+        var options = {
+          width: 800,
+          chart: {
+            title: "Total Accidents in Residential Areas (Male and Female)",
+          },
+          bars: "vertical",
+          series: {
+            0: { axis: "Male" },
+            1: { axis: "Female" },
+          },
+          axes: {
+            x: {
+              Female: { label: "Female" },
+              Male: { side: "top", label: "Male" },
+            },
+          },
+          backgroundColor: "transparent",
+        };
+
+        var chart = new google.charts.Bar(
+          document.getElementById("dual_x_div")
+        );
+        chart.draw(data, options);
+      }
+    </script>
+  </body>
+</html>

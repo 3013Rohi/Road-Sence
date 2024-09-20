@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../static/icon/ig.png" />
+    <title>RoadSence</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .header-area {
+        background: rgba(0, 0, 0, 0.7);
+        transition: background 0.5s;
+      }
+      .header-area.header-sticky {
+        background: #000;
+      }
+      .logo em {
+        color: #f7600e;
+      }
+      .nav li a {
+        color: #fff;
+        transition: color 0.3s;
+      }
+      .nav li a:hover,
+      .nav li a.active {
+        color: #f7600e;
+      }
+      .table-container {
+        animation: fadeIn 1s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .table th,
+      .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #e5e7eb;
+      }
+      .table th {
+        background-color: #f3f4f6;
+        font-weight: 700;
+      }
+      .table tr:hover {
+        background-color: #f9fafb;
+      }
+      .footer {
+        background: #000;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .scroll-arrow {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background-color: #3b82f6;
+        color: #fff;
+        padding: 0.5rem;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        display: none;
+      }
+      .scroll-arrow svg {
+        width: 24px;
+        height: 24px;
+      }
+      .scroll-arrow:hover {
+        background-color: #2563eb;
+        transform: scale(1.1);
+      }
+      .scroll-up {
+        bottom: 4rem;
+      }
+      .scroll-down {
+        bottom: 2rem;
+        transform: rotate(180deg);
+      }
+      .scroll-arrow.up {
+        display: block;
+      }
+      .scroll-arrow.down {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Area -->
+    <header class="header-area header-sticky py-4">
+      <div class="container mx-auto">
+        <div class="flex justify-between items-center">
+          <nav class="flex items-center space-x-6">
+            <a href="index.html" class="logo text-2xl font-bold text-white">
+              Road<em class="text-orange-500">Sence</em>
+            </a>
+            <ul class="nav flex space-x-4">
+              <li>
+                <a
+                  href="{{url_for('first')}}"
+                  class="text-white hover:text-orange-500 transition duration-300"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{{url_for('home')}}"
+                  class="text-white hover:text-orange-500 transition duration-300"
+                  >Prediction</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-16">
+      <div class="container mx-auto">
+        <div
+          class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg table-container"
+        >
+          <h2 class="text-3xl font-bold mb-8 text-center">Preview</h2>
+          <div class="overflow-x-auto">
+            <table class="table w-full text-left">
+              <!-- Example table structure -->
+              <thead>
+                <tr>
+                  <th class="py-3 px-4 bg-gray-200">Header 1</th>
+                  <th class="py-3 px-4 bg-gray-200">Header 2</th>
+                  <th class="py-3 px-4 bg-gray-200">Header 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data rows go here -->
+                {{ df_view.to_html(classes="table w-full text-left", na_rep="-")
+                | safe }}
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group text-center mt-8">
+            <input
+              type="button"
+              onclick="hideLoader()"
+              class="btn px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300"
+              value="Click to Train | Test"
+            />
+            <div id="loading" class="hidden mt-4">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-black text-white py-4 text-center">
+      <div class="container mx-auto">
+        &copy; 2024 Road Accident Prediction | Designed by Rohit.jsx
+      </div>
+    </footer>
+
+    <!-- Scroll Arrows -->
+    <div id="scroll-up" class="scroll-arrow scroll-up">
+      <svg
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7-7-7 7"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 4v16"
+        ></path>
+      </svg>
+    </div>
+    <div id="scroll-down" class="scroll-arrow scroll-down">
+      <svg
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 15l-7 7-7-7"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 20V4"
+        ></path>
+      </svg>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../static/js/jquery-2.1.0.min.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/scrollreveal.min.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imgfix.min.js"></script>
+    <script src="../static/js/mixitup.js"></script>
+    <script src="../static/js/accordions.js"></script>
+    <script src="../static/js/custom.js"></script>
+    <script type="text/javascript">
+      function hideLoader() {
+        document.getElementById("loading").style.display = "block";
+        setTimeout(function () {
+          document.getElementById("loading").style.display = "none";
+          alert("Training finished!");
+          window.location.href = "{{url_for('home')}}";
+        }, 1000);
+      }
+
+      document.addEventListener("scroll", function () {
+        const scrollUp = document.getElementById("scroll-up");
+        const scrollDown = document.getElementById("scroll-down");
+        const scrollPosition = window.scrollY;
+        const documentHeight = document.documentElement.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        // Show/hide arrows based on scroll position
+        if (scrollPosition > 100) {
+          scrollUp.classList.remove("hidden");
+        } else {
+          scrollUp.classList.add("hidden");
+        }
+
+        if (scrollPosition < documentHeight - windowHeight - 100) {
+          scrollDown.classList.remove("hidden");
+        } else {
+          scrollDown.classList.add("hidden");
+        }
+
+        // Adjust arrow direction based on scroll position
+        scrollUp.classList.toggle("up", scrollPosition > 100);
+        scrollDown.classList.toggle(
+          "down",
+          scrollPosition < documentHeight - windowHeight - 100
+        );
+      });
+
+      document.getElementById("scroll-up").onclick = function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+      document.getElementById("scroll-down").onclick = function () {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      };
+    </script>
+  </body>
+</html>

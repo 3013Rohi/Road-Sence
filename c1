@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Icon-->
+    <link rel="icon" type="image/png" href="..\static\icon\ig.png" />
+    <title>RoadSence</title>
+    <!--Icon-->
+
+    <!-- Additional CSS Files -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/css/font-awesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/templatemo-training-studios.css"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f4f4f9;
+        animation: fadeIn 1s;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .header-area {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .login-section {
+        padding: 100px 0;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 50px;
+        animation: slideIn 0.5s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateY(50px);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      .login-section h1 {
+        font-size: 2.5em;
+        font-weight: 600;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #333;
+      }
+      .main-banner {
+        position: relative;
+        height: 100vh;
+        background: url("../static/images/gym-video.mp4") no-repeat center
+          center;
+        background-size: cover;
+      }
+
+      .main-banner .header-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+      }
+
+      .form-control {
+        margin-bottom: 20px;
+        border-radius: 30px;
+        padding: 20px;
+        font-size: 1.1em;
+      }
+      .btn-success {
+        border-radius: 30px;
+        padding: 10px 30px;
+        font-size: 1.1em;
+      }
+      .footer {
+        background: #333;
+        color: #fff;
+        padding: 30px 0;
+        text-align: center;
+      }
+      .signup-link,
+      .login-link {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .signup-link a,
+      .login-link a {
+        color: #28a745;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .signup-link a:hover,
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+      .form-group label {
+        color: #333;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">Road <em>Accident</em></a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section">
+                  <a href="{{ url_for('first') }}" class="active">Home</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="{{ url_for('login') }}">Login</a>
+                </li>
+              </ul>
+              <a class="menu-trigger"><span>Menu</span></a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    <!-- Main Banner Area -->
+    <div class="main-banner" id="top">
+      <video autoplay muted loop id="bg-video">
+        <source src="../static/images/gym-video.mp4" type="video/mp4" />
+      </video>
+      <div class="video-overlay header-text">
+        <div class="caption">
+          <h2>A Road Accident Prediction</h2>
+        </div>
+      </div>
+    </div>
+    <!-- End Main Banner Area -->
+    <!-- ***** Create Account Section Start ***** -->
+    <section class="login-section" id="create-account">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h1>Create Account</h1>
+            <div class="form-group">
+              <label for="new-uname"><b>Username</b></label>
+              <input
+                type="text"
+                id="new-uname"
+                name="new-uname"
+                placeholder="Enter Username"
+                class="form-control"
+                pattern="[A-Za-z0-9]{4,20}"
+                title="Username must be 4-20 characters long and contain only letters and numbers."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="new-email"><b>Email</b></label>
+              <input
+                type="email"
+                id="new-email"
+                name="new-email"
+                placeholder="Enter Email"
+                class="form-control"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title="Please enter a valid email address."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="new-mobile"><b>Mobile Number</b></label>
+              <input
+                type="tel"
+                id="new-mobile"
+                name="new-mobile"
+                placeholder="Enter Mobile Number"
+                class="form-control"
+                pattern="\d{10}"
+                title="Mobile number must be 10 digits."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="new-pwd"><b>Password</b></label>
+              <input
+                type="password"
+                id="new-pwd"
+                name="new-pwd"
+                placeholder="Enter Password"
+                class="form-control"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}"
+                title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character (@#$%^&+=)."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="confirm-pwd"><b>Confirm Password</b></label>
+              <input
+                type="password"
+                id="confirm-pwd"
+                name="confirm-pwd"
+                placeholder="Confirm Password"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group text-center">
+              <input
+                type="button"
+                class="btn btn-success"
+                value="Create Account"
+                onclick="createAccount()"
+              />
+            </div>
+            <div class="login-link">
+              Already have an account?
+              <a href="{{ url_for('login') }}">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ***** Create Account Section End ***** -->
+
+    <!-- ***** Footer Start ***** -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            &copy; 2024 RoadSence | Designed by Rohit.jsx
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ***** Footer End ***** -->
+
+    <!-- jQuery -->
+    <script src="../static/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="../static/js/scrollreveal.min.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imgfix.min.js"></script>
+    <script src="../static/js/mixitup.js"></script>
+    <script src="../static/js/accordions.js"></script>
+
+    <!-- Global Init -->
+    <script src="../static/js/custom.js"></script>
+
+    <script>
+      let users = [{ username: "admin", password: "admin" }];
+
+      function createAccount() {
+        var uname = document.getElementById("new-uname").value;
+        var email = document.getElementById("new-email").value;
+        var mobile = document.getElementById("new-mobile").value;
+        var pwd = document.getElementById("new-pwd").value;
+        var confirmPwd = document.getElementById("confirm-pwd").value;
+
+        if (pwd !== confirmPwd) {
+          alert("Passwords do not match!");
+          return;
+        }
+
+        // Perform further validation if needed
+
+        users.push({ username: uname, password: pwd });
+        alert("Account Created Successfully!");
+        window.location = "{{ url_for('login') }}";
+      }
+    </script>
+  </body>
+</html>

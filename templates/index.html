@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../static/icon/ig.png" />
+    <title>RoadSence</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: #333;
+      }
+      .header-sticky {
+        background: rgba(0, 0, 0, 0.7);
+        transition: background 0.5s;
+      }
+      .header-sticky.scrolled {
+        background: #000;
+      }
+      .caption h2 {
+        font-size: 3rem;
+        animation: fadeInDown 1s ease-in-out;
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .gradient-bg {
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+      }
+      .shadow-effect {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .transition-effect {
+        transition: all 0.3s ease;
+      }
+      .transition-effect:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .button-hover:hover {
+        background-color: #e86d4e;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Area -->
+    <header
+      class="header-sticky fixed top-0 left-0 w-full py-4 bg-black text-white shadow-md z-30"
+    >
+      <div class="container mx-auto flex justify-between items-center px-4">
+        <a href="index.html" class="text-2xl font-bold text-orange-500"
+          >Road<em>Sence</em></a
+        >
+        <nav class="flex items-center space-x-6">
+          <a href="{{url_for('home')}}" class="hover:text-orange-500"
+            >Prediction</a
+          >
+          <a href="{{url_for('performance')}}" class="hover:text-orange-500"
+            >Performance Analysis</a
+          >
+          <a href="{{url_for('chart')}}" class="hover:text-orange-500">Chart</a>
+          <a href="{{url_for('first')}}" class="hover:text-orange-500"
+            >Logout</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Prediction Form Section -->
+    <section id="schedule" class="py-16 bg-white shadow-effect">
+      <div class="container mx-auto">
+        <div
+          class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg gradient-bg transition-effect"
+        >
+          <h1 class="text-2xl font-bold mb-6 text-center text-white">
+            Road Accident Prediction
+          </h1>
+          <form
+            action="{{ url_for('predict') }}"
+            method="post"
+            class="space-y-4"
+          >
+            <div class="grid grid-cols-1 gap-4">
+              {% for field, options in { 'state': states, 'junction': junctions,
+              'vechicleAge': vechicleAge, 'humanAgeSex': humanAgeSex,
+              'personWithoutPrecautions': personWithoutPrecautions, 'areas':
+              areas, 'typeOfPlace': typeOfPlace, 'vehicleLoad': vehicleLoad,
+              'trafficRulesViolation': trafficRulesViolation, 'weather':
+              weather, 'vehicleTypeSex': vehicleTypeSex, 'roadType': roadType,
+              'License': License, 'time': time }.items() %}
+              <div>
+                <label
+                  for="{{ field }}"
+                  class="block text-sm font-medium text-gray-700 capitalize"
+                  >{{ field.replace('_', ' ') }}:</label
+                >
+                <select
+                  name="{{ field }}"
+                  id="{{ field }}"
+                  class="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                  required
+                >
+                  {% for option in options %}
+                  <option value="{{ option }}">{{ option }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300 button-hover"
+              >
+                Predict
+              </button>
+            </div>
+          </form>
+          <h1 class="text-center mt-6 text-xl font-semibold">
+            Prediction is: {{ prediction_text }}
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-4 text-center">
+      <div class="container mx-auto">
+        <!-- Support us via PayPal to info@templatemo.com -->
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../static/js/jquery-2.1.0.min.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/scrollreveal.min.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imgfix.min.js"></script>
+    <script src="../static/js/mixitup.js"></script>
+    <script src="../static/js/accordions.js"></script>
+    <script src="../static/js/custom.js"></script>
+  </body>
+</html>

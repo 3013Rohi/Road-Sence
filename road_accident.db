@@ -1,0 +1,119 @@
+import sqlite3
+
+# Connect to SQLite database. It will be created if it doesn't exist.
+conn = sqlite3.connect('road_accident.db')
+
+# Create a cursor object
+c = conn.cursor()
+
+# Create tables
+c.execute('''CREATE TABLE IF NOT EXISTS states
+             (id INTEGER PRIMARY KEY, state TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS junctions
+             (id INTEGER PRIMARY KEY, junction TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS vehicle_age
+             (id INTEGER PRIMARY KEY, age TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS human_age_sex
+             (id INTEGER PRIMARY KEY, age_sex TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS person_without_precautions
+             (id INTEGER PRIMARY KEY, precaution TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS areas
+             (id INTEGER PRIMARY KEY, area TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS type_of_place
+             (id INTEGER PRIMARY KEY, place TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS vehicle_load
+             (id INTEGER PRIMARY KEY, load TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS traffic_rules_violation
+             (id INTEGER PRIMARY KEY, violation TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS weather
+             (id INTEGER PRIMARY KEY, weather TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS vehicle_type_sex
+             (id INTEGER PRIMARY KEY, type_sex TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS road_type
+             (id INTEGER PRIMARY KEY, road_type TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS license_type
+             (id INTEGER PRIMARY KEY, license_type TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS time
+             (id INTEGER PRIMARY KEY, time TEXT)''')
+
+c.execute('''CREATE TABLE IF NOT EXISTS accidents
+             (id INTEGER PRIMARY KEY, state_id INTEGER, junction_id INTEGER, vehicle_age_id INTEGER, 
+              human_age_sex_id INTEGER, person_without_precautions_id INTEGER, area_id INTEGER, 
+              type_of_place_id INTEGER, vehicle_load_id INTEGER, traffic_rules_violation_id INTEGER, 
+              weather_id INTEGER, vehicle_type_sex_id INTEGER, road_type_id INTEGER, license_type_id INTEGER, 
+              time_id INTEGER, accident TEXT, FOREIGN KEY (state_id) REFERENCES states (id), 
+              FOREIGN KEY (junction_id) REFERENCES junctions (id), FOREIGN KEY (vehicle_age_id) REFERENCES vehicle_age (id), 
+              FOREIGN KEY (human_age_sex_id) REFERENCES human_age_sex (id), FOREIGN KEY (person_without_precautions_id) REFERENCES person_without_precautions (id), 
+              FOREIGN KEY (area_id) REFERENCES areas (id), FOREIGN KEY (type_of_place_id) REFERENCES type_of_place (id), 
+              FOREIGN KEY (vehicle_load_id) REFERENCES vehicle_load (id), FOREIGN KEY (traffic_rules_violation_id) REFERENCES traffic_rules_violation (id), 
+              FOREIGN KEY (weather_id) REFERENCES weather (id), FOREIGN KEY (vehicle_type_sex_id) REFERENCES vehicle_type_sex (id), 
+              FOREIGN KEY (road_type_id) REFERENCES road_type (id), FOREIGN KEY (license_type_id) REFERENCES license_type (id), 
+              FOREIGN KEY (time_id) REFERENCES time (id))''')
+
+# Insert data into tables
+states = [('Andhra Pradesh'), ('Arunachal Pradesh'), ('Assam'), ('Bihar'), ('Chhattisgarh'), 
+          ('Goa'), ('Gujarat'), ('Haryana'), ('Himachal Pradesh'), ('Jammu and Kashmir'), 
+          ('Jharkhand'), ('Karnataka'), ('Kerala'), ('Madhya Pradesh'), ('Maharashtra'), 
+          ('Manipur'), ('Meghalaya'), ('Mizoram'), ('Nagaland'), ('Odisha'), ('Punjab'), 
+          ('Rajasthan'), ('Sikkim'), ('Tamil Nadu'), ('Telangana'), ('Tripura'), ('Uttar Pradesh'), 
+          ('Uttarakhand'), ('West Bengal')]
+c.executemany('INSERT INTO states (state) VALUES (?)', states)
+
+junctions = [('Yes'), ('No')]
+c.executemany('INSERT INTO junctions (junction) VALUES (?)', junctions)
+
+vehicle_age = [('0-5'), ('5-10'), ('10-15'), ('15-20'), ('20-25'), ('25-30'), ('30-35'), ('35-40'), ('40-45'), ('45-50'), ('50-55'), ('55-60'), ('60-65')]
+c.executemany('INSERT INTO vehicle_age (age) VALUES (?)', vehicle_age)
+
+human_age_sex = [('Male 0-20'), ('Male 21-30'), ('Male 31-40'), ('Male 41-50'), ('Male 51-60'), 
+                 ('Female 0-20'), ('Female 21-30'), ('Female 31-40'), ('Female 41-50'), ('Female 51-60')]
+c.executemany('INSERT INTO human_age_sex (age_sex) VALUES (?)', human_age_sex)
+
+person_without_precautions = [('Yes'), ('No')]
+c.executemany('INSERT INTO person_without_precautions (precaution) VALUES (?)', person_without_precautions)
+
+areas = [('Urban'), ('Rural')]
+c.executemany('INSERT INTO areas (area) VALUES (?)', areas)
+
+type_of_place = [('Highway'), ('City'), ('Town'), ('Village')]
+c.executemany('INSERT INTO type_of_place (place) VALUES (?)', type_of_place)
+
+vehicle_load = [('Yes'), ('No')]
+c.executemany('INSERT INTO vehicle_load (load) VALUES (?)', vehicle_load)
+
+traffic_rules_violation = [('Yes'), ('No')]
+c.executemany('INSERT INTO traffic_rules_violation (violation) VALUES (?)', traffic_rules_violation)
+
+weather = [('Sunny'), ('Rainy'), ('Cloudy'), ('Windy')]
+c.executemany('INSERT INTO weather (weather) VALUES (?)', weather)
+
+vehicle_type_sex = [('Male Two Wheeler'), ('Female Two Wheeler'), ('Male Four Wheeler'), ('Female Four Wheeler')]
+c.executemany('INSERT INTO vehicle_type_sex (type_sex) VALUES (?)', vehicle_type_sex)
+
+road_type = [('Highway'), ('City Road'), ('Town Road'), ('Village Road')]
+c.executemany('INSERT INTO road_type (road_type) VALUES (?)', road_type)
+
+license_type = [('Valid'), ('Invalid')]
+c.executemany('INSERT INTO license_type (license_type) VALUES (?)', license_type)
+
+time = [('Morning'), ('Afternoon'), ('Evening'), ('Night')]
+c.executemany('INSERT INTO time (time) VALUES (?)', time)
+
+# Commit the transaction
+conn.commit()
+
+# Close the connection
+conn.close()

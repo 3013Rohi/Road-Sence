@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Road Accident Prediction" />
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="../static/icon/ig.png" />
+    <title>RoadSense Admin Dashboard</title>
+
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/font-awesome.css" />
+    <link
+      rel="stylesheet"
+      href="../static/css/templatemo-training-studios.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/custom.css" />
+
+    <!-- Inline Styles -->
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #f8f9fa;
+        height: 100vh;
+        padding: 15px;
+        position: fixed;
+      }
+
+      .content {
+        margin-left: 250px;
+        padding: 20px;
+        flex-grow: 1;
+      }
+
+      .navbar {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+      }
+
+      .nav-link {
+        color: white !important;
+      }
+
+      .table th,
+      .table td {
+        text-align: center;
+      }
+
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .header-text h2 {
+          font-size: 2rem;
+        }
+
+        .navbar {
+          margin-left: 0;
+          width: 100%;
+        }
+
+        .content {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#predictions">Predictions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#accidents">Accidents</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="{{url_for('first')}}" class="nav-link">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Dashboard Content -->
+      <div id="dashboard">
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>Overview of the dashboard functionalities</p>
+      </div>
+
+      <!-- Users Section -->
+      <div id="users">
+        <h2>Users</h2>
+        <p>List of users who have logged in</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>john.doe@example.com</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jane Smith</td>
+              <td>jane.smith@example.com</td>
+              <td>Inactive</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Mike Johnson</td>
+              <td>mike.johnson@example.com</td>
+              <td>Active</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Predictions Section -->
+      <div id="predictions">
+        <h2>Predictions</h2>
+        <p>Prediction related content goes here</p>
+      </div>
+
+      <!-- Accidents Section -->
+      <div id="accidents">
+        <h2>Accidents</h2>
+        <p>Details of accident hotspots and statistics</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Number of Accidents</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Main Street</td>
+              <td>15</td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td>2nd Avenue</td>
+              <td>10</td>
+              <td>20%</td>
+            </tr>
+            <tr>
+              <td>Elm Street</td>
+              <td>25</td>
+              <td>50%</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Solutions</h3>
+        <ul>
+          <li>Increase traffic lights at major intersections.</li>
+          <li>Implement speed control measures.</li>
+          <li>Improve street lighting.</li>
+          <li>Increase police patrols in high-risk areas.</li>
+        </ul>
+      </div>
+
+      <!-- Performance Analysis Section -->
+      <section class="section" id="schedule">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <div class="schedule-table filtering" id="performance-section">
+                <h2>PERFORMANCE ANALYSIS</h2>
+                <div class="performance-metrics">
+                  <div><font color="green">Precision and Recall</font></div>
+                  <div><font>Recall &nbsp;&nbsp; Precision</font></div>
+                  <div>
+                    No Road Accident (0): <font>0.98 &nbsp;&nbsp; 0.99</font>
+                  </div>
+                  <div>
+                    Road Accident (1): <font>0.95 &nbsp;&nbsp; 0.97</font>
+                  </div>
+                </div>
+                <div class="confusion-matrix">
+                  <div><font color="red">Confusion Matrix</font></div>
+                  <img src="../static/download.png" alt="Confusion Matrix" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            &copy; 2024 RoadSense | Designed by Rohit.jsx
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../static/js/jquery-2.1.0.min.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/scrollreveal.min.js"></script>
+    <script src="../static/js/waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <script src="../static/js/imgfix.min.js"></script>
+    <script src="../static/js/mixitup.js"></script>
+    <script src="../static/js/accordions.js"></script>
+    <script src="../static/js/custom.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Example function to simulate prediction button click
+        $("#predict-button").on("click", function () {
+          // Hide performance section
+          $("#performance-section").hide();
+          // Display the message
+          $("#prediction-message")
+            .text("Prediction result: Road accident is likely")
+            .fadeIn(1000); // Fade in effect
+        });
+
+        // Logout redirection
+        $(".nav-link[href='{{url_for('first')}}']").on("click", function (e) {
+          e.preventDefault();
+          window.location.href = "login.html"; // Redirect to login page
+        });
+      });
+    </script>
+  </body>
+</html>

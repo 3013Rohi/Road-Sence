@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Login to RoadSence" />
+    <meta name="author" content="Rohit.jsx" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+      rel="stylesheet"
+    />
+    <title>RoadSence</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100">
+    <!-- Header Area Start -->
+    <header class="bg-gray-800 p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-white text-2xl font-bold">
+          Road<span class="text-green-500">Sence</span>
+        </a>
+        <nav>
+          <ul class="flex space-x-4">
+            <li id="user-display" class="hidden">
+              <a
+                href="#"
+                id="user-role"
+                class="text-white font-semibold hover:text-green-500"
+              ></a>
+            </li>
+            <li id="admin-dashboard-link" class="hidden">
+              <a
+                href="#"
+                onclick="showAdminDashboard()"
+                class="text-white font-semibold hover:text-green-500"
+                >Admin Dashboard</a
+              >
+            </li>
+            <li id="logout" class="hidden">
+              <a
+                href="#"
+                onclick="logout()"
+                class="text-white font-semibold hover:text-red-500"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Main Content Area -->
+    <section
+      class="flex justify-center items-center h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-black"
+      id="login-section"
+    >
+      <div
+        class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full space-y-6 animate__animated animate__fadeInUp"
+      >
+        <h1 class="text-2xl font-bold text-center text-gray-800">Login</h1>
+        <div class="form-group">
+          <label for="role" class="block font-semibold text-gray-700"
+            ><b>Select Role</b></label
+          >
+          <select
+            id="role"
+            class="form-control mt-2 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            onchange="toggleForm()"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
+        <div id="user-login">
+          <input type="hidden" id="hidden-role" value="user" />
+          <div class="form-group">
+            <label for="uname" class="block font-semibold text-gray-700"
+              ><b>Username</b></label
+            >
+            <input
+              type="text"
+              id="uname"
+              name="uname"
+              placeholder="Enter Username"
+              class="form-control mt-2 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="pwd" class="block font-semibold text-gray-700"
+              ><b>Password</b></label
+            >
+            <input
+              type="password"
+              id="pwd"
+              name="pwd"
+              placeholder="Enter Password"
+              class="form-control mt-2 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div class="form-group text-center">
+            <button
+              class="btn bg-green-500 text-white rounded-full px-6 py-2 hover:bg-green-600 active:bg-green-700"
+              onclick="login()"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+
+        <div id="admin-login" class="hidden">
+          <div class="form-group">
+            <label for="admin-uname" class="block font-semibold text-gray-700"
+              ><b>Admin Username</b></label
+            >
+            <input
+              type="text"
+              id="admin-uname"
+              name="admin-uname"
+              placeholder="Enter Admin Username"
+              class="form-control mt-2 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="admin-pwd" class="block font-semibold text-gray-700"
+              ><b>Admin Password</b></label
+            >
+            <input
+              type="password"
+              id="admin-pwd"
+              name="admin-pwd"
+              placeholder="Enter Admin Password"
+              class="form-control mt-2 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div class="form-group text-center">
+            <button
+              class="btn bg-green-500 text-white rounded-full px-6 py-2 hover:bg-green-600 active:bg-green-700"
+              onclick="adminLogin()"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+
+        <!-- Create Account and Forgot Password Links -->
+        <div class="text-center mt-4">
+          <a
+            href="{{url_for('create_account')}}"
+            onclick="createAccount()"
+            class="text-gray-600 hover:text-green-500"
+            >Create Account</a
+          >
+          |
+          <a
+            href="{{url_for('forget_password')}}"
+            onclick="forgotPassword()"
+            class="text-gray-600 hover:text-green-500"
+            >Forgot Password?</a
+          >
+        </div>
+
+        <div
+          id="role-display"
+          class="hidden text-center mt-4 text-gray-700 font-semibold"
+        >
+          <p id="selected-role-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Upload Page -->
+    <section
+      id="upload-page"
+      class="hidden p-8 bg-gray-100 h-screen animate__animated animate__fadeInUp"
+    >
+      <div class="container mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Upload Your Files</h2>
+        <form
+          class="bg-white p-6 rounded-lg shadow-lg"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="file-upload" class="block font-semibold text-gray-700"
+              >Select File to Upload</label
+            >
+            <input
+              type="file"
+              id="file-upload"
+              name="file-upload"
+              class="form-control mt-2 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div class="form-group text-center mt-4">
+            <button
+              class="btn bg-green-500 text-white rounded-full px-6 py-2 hover:bg-green-600 active:bg-green-700"
+              type="submit"
+            >
+              Upload
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section
+      id="admin-dashboard"
+      class="p-8 bg-gray-100 h-screen animate__animated animate__fadeInUp"
+    >
+      <div class="container mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Admin Dashboard</h2>
+        <div
+          id="data-list"
+          class="bg-white p-6 rounded-lg shadow-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          <!-- Dummy Data Entries -->
+          <div class="bg-gray-200 p-4 rounded-lg">
+            <h3 class="text-xl font-bold">Dummy Title 1</h3>
+            <p class="mt-2">This is a description for dummy data entry 1.</p>
+            <button
+              class="btn bg-red-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-red-600 active:bg-red-700"
+              onclick="deleteData(this)"
+            >
+              Delete
+            </button>
+            <button
+              class="btn bg-yellow-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-yellow-600 active:bg-yellow-700"
+              onclick="reviewData(this)"
+            >
+              Review
+            </button>
+          </div>
+          <div class="bg-gray-200 p-4 rounded-lg">
+            <h3 class="text-xl font-bold">Dummy Title 2</h3>
+            <p class="mt-2">This is a description for dummy data entry 2.</p>
+            <button
+              class="btn bg-red-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-red-600 active:bg-red-700"
+              onclick="deleteData(this)"
+            >
+              Delete
+            </button>
+            <button
+              class="btn bg-yellow-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-yellow-600 active:bg-yellow-700"
+              onclick="reviewData(this)"
+            >
+              Review
+            </button>
+          </div>
+          <div class="bg-gray-200 p-4 rounded-lg">
+            <h3 class="text-xl font-bold">Dummy Title 3</h3>
+            <p class="mt-2">This is a description for dummy data entry 3.</p>
+            <button
+              class="btn bg-red-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-red-600 active:bg-red-700"
+              onclick="deleteData(this)"
+            >
+              Delete
+            </button>
+            <button
+              class="btn bg-yellow-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-yellow-600 active:bg-yellow-700"
+              onclick="reviewData(this)"
+            >
+              Review
+            </button>
+          </div>
+          <!-- Add more dummy data entries as needed -->
+        </div>
+        <div class="form-group text-center mt-6">
+          <button
+            class="btn bg-green-500 text-white rounded-full px-6 py-2 hover:bg-green-600 active:bg-green-700"
+            onclick="addData()"
+          >
+            Add Data
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let users = [{ username: "Rohit30", password: "Rohit@30" }];
+      let admins = [{ username: "Admin", password: "Admin@123" }];
+
+      function toggleForm() {
+        var roleSelect = document.getElementById("role");
+        var selectedRole = roleSelect.value;
+        document.getElementById("hidden-role").value = selectedRole;
+        document
+          .getElementById("user-login")
+          .classList.toggle("hidden", selectedRole === "admin");
+        document
+          .getElementById("admin-login")
+          .classList.toggle("hidden", selectedRole === "user");
+      }
+
+      function login() {
+        var username = document.getElementById("uname").value;
+        var password = document.getElementById("pwd").value;
+        var isLoggedIn = false;
+
+        users.forEach(function (user) {
+          if (username === user.username && password === user.password) {
+            isLoggedIn = true;
+          }
+        });
+
+        if (isLoggedIn) {
+          document.getElementById("login-section").classList.add("hidden");
+          document.getElementById("upload-page").classList.remove("hidden");
+          document.getElementById("role-display").classList.remove("hidden");
+          document.getElementById(
+            "selected-role-text"
+          ).innerHTML = `Logged in as: User (${username})`;
+          document.getElementById("user-display").classList.remove("hidden");
+          document.getElementById("user-role").innerHTML = `User (${username})`;
+          document.getElementById("logout").classList.remove("hidden");
+          window.location = "{{url_for('upload')}}";
+        } else {
+          alert("Invalid username or password.");
+        }
+      }
+
+      function adminLogin() {
+        var username = document.getElementById("admin-uname").value;
+        var password = document.getElementById("admin-pwd").value;
+        var isAdminLoggedIn = false;
+
+        admins.forEach(function (admin) {
+          if (username === admin.username && password === admin.password) {
+            isAdminLoggedIn = true;
+          }
+        });
+
+        if (isAdminLoggedIn) {
+          document.getElementById("login-section").classList.add("hidden");
+          document.getElementById("admin-dashboard").classList.remove("hidden");
+          document.getElementById("role-display").classList.remove("hidden");
+          document.getElementById(
+            "selected-role-text"
+          ).innerHTML = `Logged in as: Admin (${username})`;
+          document.getElementById("user-display").classList.remove("hidden");
+          document.getElementById(
+            "user-role"
+          ).innerHTML = `Admin (${username})`;
+          document
+            .getElementById("admin-dashboard-link")
+            .classList.remove("hidden");
+          document.getElementById("logout").classList.remove("hidden");
+        } else {
+          alert("Invalid admin username or password.");
+        }
+      }
+
+      function logout() {
+        document.getElementById("login-section").classList.remove("hidden");
+        document.getElementById("upload-page").classList.add("hidden");
+        document.getElementById("admin-dashboard").classList.add("hidden");
+        document.getElementById("role-display").classList.add("hidden");
+        document.getElementById("user-display").classList.add("hidden");
+        document.getElementById("admin-dashboard-link").classList.add("hidden");
+        document.getElementById("logout").classList.add("hidden");
+        document.getElementById("uname").value = "";
+        document.getElementById("pwd").value = "";
+        document.getElementById("admin-uname").value = "";
+        document.getElementById("admin-pwd").value = "";
+      }
+
+      function showAdminDashboard() {
+        document.getElementById("upload-page").classList.add("hidden");
+        document.getElementById("admin-dashboard").classList.remove("hidden");
+      }
+
+      function addData() {
+        const dataList = document.getElementById("data-list");
+
+        // Prompt the user to enter the title and description
+        const title = prompt("Enter the title for the new data entry:");
+        if (!title) {
+          alert("Title cannot be empty.");
+          return;
+        }
+
+        const description = prompt(
+          "Enter the description for the new data entry:"
+        );
+        if (!description) {
+          alert("Description cannot be empty.");
+          return;
+        }
+
+        // Create a new data item element
+        const newDataItem = document.createElement("div");
+        newDataItem.className = "bg-gray-200 p-4 rounded-lg";
+        newDataItem.innerHTML = `
+          <h3 class="text-xl font-bold">${title}</h3>
+          <p class="mt-2">${description}</p>
+          <button
+            class="btn bg-red-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-red-600 active:bg-red-700"
+            onclick="deleteData(this)"
+          >
+            Delete
+          </button>
+          <button
+            class="btn bg-yellow-500 text-white rounded-full px-4 py-2 mt-4 hover:bg-yellow-600 active:bg-yellow-700"
+            onclick="reviewData(this)"
+          >
+            Review
+          </button>
+        `;
+
+        // Append the new data item to the data list
+        dataList.appendChild(newDataItem);
+      }
+
+      function deleteData(element) {
+        if (confirm("Are you sure you want to delete this item?")) {
+          element.parentElement.remove();
+        }
+      }
+
+      function reviewData(element) {
+        alert(
+          "Reviewing data: " +
+            element.previousElementSibling.previousElementSibling.textContent
+        );
+      }
+    </script>
+  </body>
+</html>

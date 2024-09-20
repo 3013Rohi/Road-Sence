@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Road Accident</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-4 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mt-4 {
+      margin-top: 1.5rem;
+    }
+
+    .pt-5 {
+      padding-top: 3rem;
+    }
+
+    .pb-5 {
+      padding-bottom: 3rem;
+    }
+
+    .header-area {
+      background-color: #333;
+      border-bottom: 1px solid #e7e7e7;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-area .main-nav .nav li a {
+      color: #fff;
+      font-weight: 500;
+      padding: 10px 15px;
+      text-transform: uppercase;
+    }
+
+    .header-area .main-nav .nav li a:hover,
+    .header-area .main-nav .nav li a.active {
+      color: #ffcc00;
+    }
+
+    .main-banner {
+      position: relative;
+      height: 100vh;
+      background: url("../static/images/gym-video.mp4") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .main-banner .header-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+    }
+
+    .main-banner .header-text h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      animation: slideInDown 1s ease-in-out;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: #fff;
+      border-color: #28a745;
+      transition: all 0.3s ease;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+
+    .btn-large {
+      padding: 10px 20px;
+      font-size: 1.25rem;
+      border-radius: 50px;
+    }
+
+    #download-section {
+      background: linear-gradient(135deg, #007bff, #00bfff);
+      color: #fff;
+      text-align: center;
+      padding: 60px 0;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    #download-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    #download-section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #download-section .btn-large {
+      background-color: #ffcc00;
+      color: #333;
+      border: none;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    #download-section .btn-large:hover {
+      background-color: #ffa500;
+      transform: scale(1.1);
+    }
+
+    #download-section p {
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #upload-section {
+      display: none;
+    }
+
+    #upload-section .upload-form {
+      margin: 0 auto;
+      max-width: 400px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- End Preloader -->
+
+  <!-- Header Area -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="index.html" class="logo">Road <em>Accident</em></a>
+            <ul class="nav">
+              <li class="scroll-to-section">
+                <a href="{{ url_for('first') }}" class="active">Home</a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{{ url_for('upload') }}">Upload</a>
+              </li>
+            </ul>
+            <a class="menu-trigger"><span>Menu</span></a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- End Header Area -->
+
+  <!-- Main Banner Area -->
+  <div class="main-banner" id="top">
+    <video autoplay muted loop id="bg-video">
+      <source src="../static/images/gym-video.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay header-text">
+      <div class="caption">
+        <h2>A Road Accident Prediction</h2>
+      </div>
+    </div>
+  </div>
+  <!-- End Main Banner Area -->
+
+  <!-- Download Section -->
+  <section class="section" id="download-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <h2 class="mb-4">Download</h2>
+          <a href="..\static\files\upload.csv" download id="download-link">
+            <button type="button" class="btn btn-large" onclick="handleDownload()">
+              Download
+            </button>
+          </a>
+          <p class="mt-4">Download the CSV file to view data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Download Section -->
+
+  <!-- Upload Section -->
+  <section class="section pt-5 pb-5" id="upload-section" style="display: none">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <div class="schedule-table filtering text-center">
+            <h2 class="mb-4">Upload</h2>
+            <div class="upload-form">
+              <form action="http://localhost:5000/preview" method="post" enctype="multipart/form-data">
+                <input type="file" name="datasetfile" id="file1" class="form-control mb-4" required />
+                <input type="submit" class="btn btn-success btn-large" value="Upload" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Upload Section -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          &copy; 2024 RoadSence | Designed by Rohit.jsx
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- jQuery -->
+  <script src="../static/js/jquery-2.1.0.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="../static/js/popper.js"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+
+  <!-- Plugins -->
+  <script src="../static/js/scrollreveal.min.js"></script>
+  <script src="../static/js/waypoints.min.js"></script>
+  <script src="../static/js/jquery.counterup.min.js"></script>
+  <script src="../static/js/imgfix.min.js"></script>
+  <script src="../static/js/mixitup.js"></script>
+  <script src="../static/js/accordions.js"></script>
+
+  <!-- Global Init -->
+  <script src="../static/js/custom.js"></script>
+
+  <!-- Custom Scripts -->
+  <script>
+    function handleDownload() {
+      // Trigger file download
+      const link = document.getElementById("download-link");
+      link.click();
+
+      // Show the upload section after download completes
+      setTimeout(() => {
+        document.getElementById("upload-section").style.display = "block";
+        document.getElementById("download-section").style.display = "none";
+      }, 1000); // Adjust the timeout as necessary
+    }
+  </script>
+</body>
+
+</html>
+<a href="..\static\files\upload.csv" download id="download-link"></a>
+
+.video-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff;
+}
